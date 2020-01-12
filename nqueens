@@ -1,0 +1,81 @@
+import java.util.*;
+class Backtracking_nqueens{
+
+static boolean isPossible(int n,int row,int column,int[][] a){
+//vertical
+for(int i=row-1;i>=0;i--){
+if(a[i][column]==1)
+return false;
+}
+//upper left diagonal
+
+for(int i=row-1,j=column-1;i>=0 && j>=0;i--,j--){
+if(a[i][j]==1)
+return false;
+}
+
+
+
+for(int i=row-1,j=column+1;i>=0 && j<n;i--,j++){
+if(a[i][j]==1)
+return false;
+}
+
+
+
+
+return true;
+
+
+
+
+
+
+
+}
+
+static void nqueenhelper(int n,int row,int[][] a){
+if(row==n){
+for(int i=0;i<n;i++){
+for(int j=0;j<n;j++){
+System.out.print(a[i][j]+" ");
+}
+}
+
+
+System.out.println("");
+
+return;
+
+}
+
+
+for(int j=0;j<n;j++){
+if(isPossible(n,row,j,a)){
+a[row][j]=1;
+nqueenhelper(n,row+1,a);
+a[row][j]=0;
+
+}
+
+
+}
+return;
+
+
+
+}
+
+public static void main(String args[]){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int[][] a=new int[n][n];
+for(int i=0,j=0;i<n && j<n;i++,j++)
+a[i][j]=0;
+
+
+
+nqueenhelper(n,0,a);
+
+}
+}
